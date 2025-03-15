@@ -10,6 +10,12 @@
 
 The above images illustrates the training scheme(left) and our network's architecture(right). Starting with an input image and a synthesized image generated from the mean latent vector in the W+ space of EG3D, the two images are concatenated and passed to the 3D-pSp encoder with the camera parameters. Since EG3D's map2style network utilizes camera parameters to project the inputs into the W+ space, we leverage these parameters in the encoder network to robustly learn 3D prior information. Specifically, the camera parameters are added to the map2style networks, as seen in the right figure. Additionally, we introduce a 1x1 convolutional layer in the map2style network to enhance its expressiveness. Finally, the 3D-pSp encoder computes the residual between the two input images and adds it to the original latent vector to refine the inverted latent vector. Repeating this process iteratively enables our network to achieve finer details compared to the original pSp network.
 
+In experiments using CelebA dataset as the test set, we can find our model preserves the identity of faces and conserves fine details better than pSp and e4e.
+| Model            | FID (↓) | LPIPS (↓) | ID (↑) |
+|------------------|---------|------------|---------|
+| pSp               | 146.37  | 0.35       | 0.12    |
+| e4e           | **143.92** | 0.72       | 0.07    |
+| **3D-pSp (Ours)** | 154.57  | **0.32**    | **0.41** |
 
 **Notice: Revised version with some adjustments**
 - This repository is the same as [KyungWonCho](https://github.com/KyungWonCho/3DpSp) because we worked together on the term project. This is a revised version with some adjustments. The overall content, including the model architecture and training scheme, remains the same as mentioned above.
